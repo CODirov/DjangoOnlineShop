@@ -1,7 +1,5 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+
 
 def home(request):
-    return HttpResponse("barcha qo'shiqlar")
-
-def single_music(request):
-    return HttpResponse("musiqa")
+    return render(request, "index.html")

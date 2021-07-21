@@ -16,11 +16,11 @@ class User(models.Model):
 
 class Category(models.Model):
     class Meta():
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+        verbose_name = "Kategoriya"
+        verbose_name_plural = "Kategoriyalar"
 
-    name = models.CharField(max_length=255)
-    icon = models.ImageField(upload_to="images/", null=True)
+    name = models.CharField(max_length=255, verbose_name="Nomi")
+    icon = models.ImageField(upload_to="images/", null=True, verbose_name="Rasmi")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -31,8 +31,8 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
     class Meta():
-        verbose_name = "Subcategory"
-        verbose_name_plural = "Subcategories"
+        verbose_name = "Kichik kategoriya"
+        verbose_name_plural = "Kichik kategoriyalar"
 
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=CASCADE, null=True)
@@ -40,19 +40,29 @@ class Subcategory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
 
-class Products(models.Model):
+
+class Product(models.Model):
     class Meta():
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
+        verbose_name = "Mahsulot"
+        verbose_name_plural = "Mahsulotlar"
 
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     price = models.FloatField()
-    stock = models.IntegerField()
-    product_description = models.TextField()
+    slug = models.CharField(max_length=255, null=True)
+    description = models.TextField()
     rating = models.FloatField()
     image = models.ImageField(upload_to="images/", null=True)
-    category = models.ForeignKey(Subcategory, on_delete=CASCADE, null=True)
+    sub_category = models.ForeignKey(Subcategory, on_delete=CASCADE, null=True)
+    is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.price}"
+
+    def get_rating_precent(self):
+        return 100 * (self.rating/5)

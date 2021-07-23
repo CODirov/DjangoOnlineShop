@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from datetime import datetime, timezone
+from django.conf import settings
 
 
 class User(models.Model):
@@ -21,6 +23,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=255, verbose_name="Nomi")
     icon = models.ImageField(upload_to="images/", null=True, verbose_name="Rasmi")
+    slug = models.CharField(max_length=255, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,6 +39,7 @@ class Subcategory(models.Model):
 
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=CASCADE, null=True)
+    slug = models.CharField(max_length=255, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -66,3 +70,7 @@ class Product(models.Model):
 
     def get_rating_precent(self):
         return 100 * (self.rating/5)
+
+    def is_new_product(self):
+        time_delta = datetime.now(timezone.utc) - self.created_at
+        return time_delta.seconds < settings.NEW_PRODUCT_SECONDS

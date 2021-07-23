@@ -2,7 +2,7 @@ from onlineshop.settings import STATIC_ROOT
 from django.contrib import admin
 from django.urls import path, include
 from store.views import *
-from django.conf import Settings, settings
+from django.conf import settings
 from django.conf.urls.static import static
 
 

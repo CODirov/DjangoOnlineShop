@@ -126,7 +126,7 @@
                     <a href="{% url 'product-detail' slug=product.slug %}" class="h5 title">{{product.title}}</a>
                     <div class="rating-wrap mb-2">
                         <ul class="rating-stars">
-                            <li style="width:100%" class="stars-active"> 
+                            <li style="width:{{product.get_rating_percent}}%" class="stars-active"> 
                                 <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
                                 <i class="fa fa-star"></i> <i class="fa fa-star"></i> 
                                 <i class="fa fa-star"></i> 

@@ -20,11 +20,27 @@
                     <li><a class="dropdown-item" href="#">First item</a></li>
                     <li><a class="dropdown-item" href="#">Second item</a></li>
                     <li><a class="dropdown-item" href="#">Third item </a></li>
-                </ul>
-            </li>
+                  </ul>
+                </li>
             <li><a href="#" class="nav-link"> My shop </a></li>
-            <li><a href="#" class="nav-link"> <i class="fa fa-bell"></i> </a></li>
-            <li><a href="#" class="nav-link"> <i class="fa fa-shopping-cart"></i> </a></li>
+              <div class="widget-header mr-3">
+                <a href="#" class="widget-view">
+                  <div class="icon-area">
+                    <i class="fa fa-bell"></i>
+                    <span class="notify">1</span>
+                  </div>
+                </a>
+              </div>            
+            <li>
+              <div class="widget-header mr-3">
+                <a href="#" class="widget-view">
+                  <div class="icon-area">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="notify">{{cartitems_amount}}</span>
+                  </div>
+                </a>
+              </div>
+            </li>
         </ul> <!-- list-inline //  -->
       </div> <!-- navbar-collapse .// -->
     </div> <!-- container //  -->

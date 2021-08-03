@@ -3,12 +3,20 @@ from django.contrib import admin
 from .models import *
 
 
+
+class ProductimageAdmin(admin.StackedInline):
+    model = ProductImage
+    fields = ["image"]
+    extra = 4
+
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["title", "price", "rating", "sub_category", "is_active"]
     list_display_links = ["title"]
     search_fields = ["title", "description"]
     prepopulated_fields = {"slug": ("title",)}
 
+    inlines = [ProductimageAdmin]
 
 
 class CategoryAdmin(admin.ModelAdmin):

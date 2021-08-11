@@ -7,7 +7,19 @@ from .models import *
 class ProductimageAdmin(admin.StackedInline):
     model = ProductImage
     fields = ["image"]
-    extra = 4
+    extra = 1
+
+
+class ProductcolorAdmin(admin.StackedInline):
+    model = ProductColor
+    fields = ["name"]
+    extra = 1
+
+
+class ProductsizeAdmin(admin.StackedInline):
+    model = ProductSize
+    fields = ["name"]
+    extra = 1
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -16,7 +28,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ["title", "description"]
     prepopulated_fields = {"slug": ("title",)}
 
-    inlines = [ProductimageAdmin]
+    inlines = [ProductimageAdmin, ProductcolorAdmin, ProductsizeAdmin]
 
 
 class CategoryAdmin(admin.ModelAdmin):

@@ -4,6 +4,10 @@ from django.urls import reverse
 from .utils import min_max_filter, get_paginated
 from .models import *
 
+from shopping.models import CartItem
+from shopping.utils import get_cart
+
+
 def home(request):
     products = Product.objects.filter().order_by("-rating")[:12]
     context = {
@@ -72,7 +76,29 @@ def product_detail(request, slug):
         return render(reverse("home-page"))
     else:
         product = products.first()
+
+
+    if request.method == "POST":
+        color = request.POST.get("color", "")
+        size = request.POST.get("size", "")
+        cart = get_cart(request)
+
+        cartitems = CartItem.objects.filter(cart=cart, product=product, color=color, size=size)
+
+        if color == "-1" and size == "-1":
+            pass
+
+        elif cartitems.exists():
+            cartitem = cartitems.first()
+            cartitem.quantity +=1
+            cartitem.save()
+        
+        else:
+            cartitem = CartItem(product=product, cart=cart, color=color, size=size)
+            cartitem.save()
+
     context = {
         "product":product
     }
     return render(request, "product_detail.html", context)
+

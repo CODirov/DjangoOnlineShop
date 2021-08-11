@@ -8,5 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("store.urls")),
     path("", include("shopping.urls")),
+    path("simpleforms/", include("simpleforms.urls")),
+    path("schoolforms/", include("schoolforms.urls")),
+    path("footballers/", include("footballers.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

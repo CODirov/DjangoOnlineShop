@@ -23,7 +23,10 @@ INSTALLED_APPS = [
 
     'store',
     'shopping',
-    'accounts'
+    'accounts',
+    'simpleforms',
+    'schoolforms',
+    'footballers'
 ]
 
 MIDDLEWARE = [

@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from store.models import Product
-from .models import Cart, CartItem
+from .models import Cart, CartItem, Coupon
 from .utils import get_cart
 
 def add_cartitem(request, cartitem_id):
@@ -46,7 +46,20 @@ def remove_cartitem(request, cartitem_id):
 def cart(request):
     cart = get_cart(request)
     cartitems = CartItem.objects.filter(cart=cart)
+    coupons = ""
+
+    if request.method == "POST":
+        coupon = request.POST.get("coupon", None)
+        coupons = Coupon.objects.get(code=coupon)
+        # cartitems.redused_price = 
+        coupons.is_used = True
+        coupons.save()
+    else:
+        coupon=None
+
     context = {
-        "cartitems": cartitems
+        "cartitems": cartitems,
+        "coupons": coupons
     }
     return render(request, "cart.html", context)
+

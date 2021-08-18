@@ -28,10 +28,19 @@
 </head>
 <body>
     <div class="container">
-      <form action="" method="POST" enctype="multipart/form-data">
+      <div class="mt-4 row justify-content-center">
+        <div class="col-8">
+          <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <input type="text" name="title" placeholder="Filial nomi" class="form-control mb-4" value="{{filial.title}}">
+            <input type="date" name="date" class="form-control mb-4" value="{{date}}">
+            <input type="time" name="time" class="form-control mb-4" value="{{time}}">
+            <input type="text" name="director" class="form-control mb-4" placeholder="Direktor ismi" value="{{filial.director.fullname}}">
+            <input type="number" name="experience" class="form-control mb-4" placeholder="Experience" value="{{filial.director.experience}}">
+
             <input type="submit" value="save" class="btn btn-success">
           </form>
+        </div>
+      </div>
     </div>
 </body>

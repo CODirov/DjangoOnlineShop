@@ -21,6 +21,7 @@ def store(request):
     if term:
         products = Product.objects.all().filter(title__contains=term)
         paginated = get_paginated(request, products, 3)
+        print(term)
 
         context = {
             "products" : paginated["items"],

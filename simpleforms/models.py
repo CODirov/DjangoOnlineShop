@@ -24,3 +24,20 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Filial(models.Model):
+    title = models.CharField(max_length=255)
+    established_at = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+
+    
+class Director(models.Model):
+    filial = models.OneToOneField(Filial, on_delete=models.CASCADE)
+    fullname = models.CharField(max_length=255)
+    experience = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.fullname

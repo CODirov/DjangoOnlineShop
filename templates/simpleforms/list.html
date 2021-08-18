@@ -33,28 +33,24 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col">Category</th>
-            <th scope="col">Views</th>
+            <th scope="col">Filial</th>
+            <th scope="col">Direktor</th>
             <th scope="col"></th>
             <th scope="col"></th>
 
         </tr>
         </thead>
         <tbody>
-            {% for singlenews in news %}    
+            {% for filial in filials %}    
                 <tr>
-                    <th scope="row">{{singlenews.id}}</th>
-                    <td>{{singlenews.title|truncatechars:30}}</td>
-                    <td>{{singlenews.content|truncatechars:50}}</td>
-                    <td>{{singlenews.category}}</td>
-                    <td>{{singlenews.views}}</td>
+                    <th scope="row">{{filial.id}}</th>
+                    <td>{{filial.title}}</td>
+                    <td>{{filial.director.fullname}}</td>
                     <td>
-                        <a href="{% url 'news-update' pk=singlenews.id %}" class="btn btn-info">Update</a>
+                        <a href="{% url 'news-update' pk=filial.id %}" class="btn btn-info">Update</a>
                     </td>
                     <td>
-                        <a href="{% url 'news-delete' pk=singlenews.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'news-delete' pk=filial.id %}" class="btn btn-danger">Delete</a>
                     </td>
 
                 </tr>

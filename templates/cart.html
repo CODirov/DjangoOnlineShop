@@ -36,7 +36,9 @@
                         {% if cartitem.get_size_name %}
                             <p class="text-muted small">Size: {{cartitem.get_size_name}}</p>
                         {% endif %}
-
+                        {% if coupons %}
+                        <span style="color: orange; font-size: small;">kupon bor</span>
+                        {% endif %}
                     </figcaption>
                 </figure>
             </td>
@@ -82,13 +84,14 @@
             <aside class="col-md-3">
                 <div class="card mb-3">
                     <div class="card-body">
-                    <form>
+                    <form method="POST" action="">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label>Have coupon?</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                <input type="text" class="form-control" name="coupon" placeholder="Coupon code">
                                 <span class="input-group-append"> 
-                                    <button class="btn btn-primary">Apply</button>
+                                    <input type="submit" value="Apply" class="btn btn-primary">
                                 </span>
                             </div>
                         </div>

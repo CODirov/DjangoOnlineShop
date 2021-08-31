@@ -23,6 +23,12 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
 
+    GENDERS = [
+        ("m", "Male"),
+        ("f", "Female")
+    ]
+    gender = models.CharField(choices=GENDERS, max_length=10, default="m")
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
